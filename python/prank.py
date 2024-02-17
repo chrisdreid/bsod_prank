@@ -28,7 +28,7 @@ _DELAY              = 0
 _SPEED              = 1000
 
 _FPATH_BG           = './images/BSOD_april_fools.jpg'
-_FPATH_IMAGE        = './images/BSOD_april_fools_queen.pngx'
+_FPATH_IMAGE        = './images/BSOD_april_fools_queen.png'
 _COLOR              = '#121186'  
 
 QUEEN_WIDTH         = 1035
