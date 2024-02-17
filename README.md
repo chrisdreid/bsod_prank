@@ -12,7 +12,7 @@ On April 1, 2012, with permission from the owners and thanks to a carefully orch
  - Install python3 if you do not already have it
  - pip install -r requirements.txt
  - python /python/prank.py
- - 
+   
 ## Command Line Arguments
 This application accepts the following command-line arguments:
 - `--color`: Background color hex code. Specify the color in hexadecimal format. (e.g., `#FFFFFF` for white)
