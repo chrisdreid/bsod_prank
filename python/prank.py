@@ -28,7 +28,7 @@ _DELAY              = 0
 _SPEED              = 1000
 
 _FPATH_BG           = './images/BSOD_april_fools.jpg'
-_FPATH_IMAGE        = './images/BSOD_april_fools_queen.pngx'
+_FPATH_IMAGE        = './images/BSOD_april_fools_queen.png'
 _COLOR              = '#121186'  
 
 QUEEN_WIDTH         = 1035
@@ -36,7 +36,7 @@ QUEEN_HEIGHT        = 678
 
 
 class AprilFools(QtWidgets.QMainWindow):
-    def __init__(self, color=None, image=None, bg=None, loops=_LOOPS, delay=_DELAY, anim_delay=_START_TIME_DELAY, padding=0, speed=_SPEED):
+    def __init__(self, color=None, image=None, bg=None, loops=_LOOPS, delay=_DELAY, anim_delay=_START_TIME_DELAY, padding=0, speed=_SPEED, bg_stretch=False):
         super(AprilFools, self).__init__(None, QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.FramelessWindowHint)
 
         self._bgColor = color or _COLOR
@@ -47,6 +47,7 @@ class AprilFools(QtWidgets.QMainWindow):
         self._anim_delay = anim_delay or _START_TIME_DELAY
         self._padding = int(padding) or 0
         self._speed = speed or _SPEED
+        self._bgStretch = bg_stretch or False
 
         self.bg = QtWidgets.QLabel(self)
         self.setCentralWidget(self.bg)
@@ -81,6 +82,8 @@ class AprilFools(QtWidgets.QMainWindow):
 
     def setBGImage(self, imagePath):
         self.bg.setPixmap(QtGui.QPixmap(imagePath))
+        if self._bgStretch:
+            self.bg.setScaledContents(True)
         
     def setImage(self, imagePath):
 
@@ -129,6 +132,7 @@ def getCLI():
     parser.add_argument('--anim_delay', type=int, default=0, help='Animation delay (ms)')
     parser.add_argument('--padding', type=int, default=0, help='Padding around the image')
     parser.add_argument('--speed', type=int, help='time in (ms) of slide from one side of screen to the other in animation. DEFAULT=%s'%_SPEED)
+    parser.add_argument('--bg_stretch', action='store_true', help='Stretch background image')
 
     return parser
 
@@ -141,7 +145,7 @@ def main(args=None):
     app = QtWidgets.QApplication(args)
     # Hide the cursor
     QtWidgets.QApplication.setOverrideCursor(QtGui.QCursor(QtCore.Qt.BlankCursor))
-    mywindow = AprilFools(color=options.color, image=options.image, bg=options.bg, loops=options.loops, delay=options.delay, anim_delay=options.anim_delay, padding=options.padding, speed=options.speed)
+    mywindow = AprilFools(color=options.color, image=options.image, bg=options.bg, loops=options.loops, delay=options.delay, anim_delay=options.anim_delay, padding=options.padding, speed=options.speed, bg_stretch=options.bg_stretch)
 
     mywindow.show()
 
